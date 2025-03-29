@@ -6,7 +6,7 @@
 /*   By: obouayed <obouayed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 16:30:50 by obouayed          #+#    #+#             */
-/*   Updated: 2025/03/29 18:24:13 by obouayed         ###   ########.fr       */
+/*   Updated: 2025/03/29 19:30:38 by obouayed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,12 @@ class ClapTrap
 		ClapTrap(const ClapTrap &src);
 		ClapTrap &operator=(const ClapTrap &rhs);
 		~ClapTrap();
-
+		
+		std::string		getName() const;
+		unsigned int	getHitpoints() const;
+		unsigned int	getEnergyPoints() const;
+		unsigned int	getAttackDamage() const;
+		
         void			attack(const std::string &target);
         void			takeDamage(unsigned int amount);
         void			beRepaired(unsigned int amount);
