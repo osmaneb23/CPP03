@@ -6,7 +6,7 @@
 /*   By: obouayed <obouayed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 17:20:52 by obouayed          #+#    #+#             */
-/*   Updated: 2025/03/29 18:28:39 by obouayed         ###   ########.fr       */
+/*   Updated: 2025/03/29 17:43:07 by obouayed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,6 @@
 
 class ScavTrap : public ClapTrap
 {
-	private:
-		bool		_isGuarding;
-		
     public:
         ScavTrap();
         ScavTrap(std::string name);
