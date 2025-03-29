@@ -6,7 +6,7 @@
 /*   By: obouayed <obouayed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 16:30:45 by obouayed          #+#    #+#             */
-/*   Updated: 2025/03/29 17:12:09 by obouayed         ###   ########.fr       */
+/*   Updated: 2025/03/29 18:25:26 by obouayed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,15 @@ ClapTrap::ClapTrap(std::string name) : _name(name), _hitpoints(10), _energyPoint
     std::cout << "ClapTrap " << _name << " is created." << std::endl;
 }
 
-ClapTrap::ClapTrap(ClapTrap const & src)
+ClapTrap::ClapTrap(ClapTrap const &src)
 {
+    std::cout << "ClapTrap copy constructor called with name: " << _name << " and source name: " << src._name << "." << std::endl;
     *this = src;
 }
 
 ClapTrap &ClapTrap::operator=(const ClapTrap &rhs)
 {
-    if (this != &rhs)
+    std::cout << "ClapTrap assignation operator called with name: " << _name << " and right hand side name: " << rhs._name << "." << std::endl;
     {
         _name = rhs._name;
         _hitpoints = rhs._hitpoints;
