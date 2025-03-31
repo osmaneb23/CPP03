@@ -6,64 +6,50 @@
 /*   By: obouayed <obouayed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 16:30:48 by obouayed          #+#    #+#             */
-/*   Updated: 2025/03/31 11:25:33 by obouayed         ###   ########.fr       */
+/*   Updated: 2025/03/31 11:36:06 by obouayed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ScavTrap.hpp"
+#include "../includes/FragTrap.hpp"
 
 int main()
 {
-    std::cout << "\n=== TESTING CONSTRUCTORS ===\n" << std::endl;
+    std::cout << "\n=== TESTING FRAGTRAP CONSTRUCTORS ===\n" << std::endl;
     
     // Test default constructor
-    ScavTrap defaultTrap;
+    FragTrap defaultTrap;
     
     // Test parameterized constructor
-    ScavTrap scavTrap1("SC4V-TP");
+    FragTrap fragTrap1("FR4G-TP");
     
     // Test copy constructor
-    ScavTrap scavTrap2(scavTrap1);
+    FragTrap fragTrap2(fragTrap1);
     
     std::cout << "\n=== TESTING BASIC FUNCTIONALITY ===\n" << std::endl;
     
-    // Test attack function (ScavTrap version)
-    scavTrap1.attack("Bandit");
+    // Test inherited attack function
+    fragTrap1.attack("Skag");
     
     // Test takeDamage function (inherited from ClapTrap)
-    scavTrap1.takeDamage(30);
+    fragTrap1.takeDamage(40);
     
     // Test beRepaired function (inherited from ClapTrap)
-    scavTrap1.beRepaired(15);
+    fragTrap1.beRepaired(20);
     
-    // Test unique ScavTrap ability
-    scavTrap1.guardGate();
-    scavTrap1.guardGate(); // Test calling guardGate twice
-    
-    std::cout << "\n=== TESTING COPY CONSTRUCTOR AND ASSIGNMENT ===\n" << std::endl;
-    
-    ScavTrap original("Original");
-    original.takeDamage(20);
-    original.attack("Target");
-    
-    std::cout << "\nCreating a copy with copy constructor:" << std::endl;
-    ScavTrap copy(original);
-    
-    std::cout << "\nTesting assignment operator:" << std::endl;
-    ScavTrap assignTarget("AssignTarget");
-    assignTarget = original;
+    // Test unique FragTrap ability
+    fragTrap1.highFivesGuys();
     
     std::cout << "\n=== TESTING ENERGY DEPLETION ===\n" << std::endl;
     
-    // Create new ScavTrap for energy testing (50 energy points)
-    ScavTrap energyTest("EnergyTest");
+    // Create new FragTrap for energy testing (100 energy points)
+    FragTrap energyTest("EnergyTest");
     
     // Attack multiple times to deplete energy
-    for (int i = 0; i < 51; i++) {
-        if (i % 10 == 0)
+    for (int i = 0; i < 101; i++) {
+        if (i % 20 == 0)
             std::cout << "Attack attempt " << (i + 1) << ": ";
         energyTest.attack("Target Dummy");
-        if (i % 10 == 9)
+        if (i % 20 == 19)
             std::cout << std::endl;
     }
     
@@ -71,12 +57,12 @@ int main()
     std::cout << "\nAttempting actions with no energy:" << std::endl;
     energyTest.attack("Enemy");
     energyTest.beRepaired(10);
-    energyTest.guardGate();
+    energyTest.highFivesGuys();
     
     std::cout << "\n=== TESTING LETHAL DAMAGE ===\n" << std::endl;
     
-    // Create a new ScavTrap for damage testing
-    ScavTrap defender("Defender");
+    // Create a new FragTrap for damage testing
+    FragTrap defender("Defender");
     
     // Deal a lot of damage
     defender.takeDamage(150);
@@ -84,7 +70,18 @@ int main()
     // Try actions while dead
     defender.attack("Someone");
     defender.beRepaired(10);
-    defender.guardGate();
+    defender.highFivesGuys();
+    
+    std::cout << "\n=== DEMONSTRATING DESTRUCTION ORDER ===\n" << std::endl;
+    
+    // Create a scope to demonstrate destruction order
+    {
+        std::cout << "Creating a new FragTrap inside a scope:" << std::endl;
+        FragTrap scopeTrap("ScopeTrap");
+        std::cout << "About to exit scope - watch destruction order:" << std::endl;
+    } // FragTrap destructor should be called first, then ClapTrap destructor
+    
+    std::cout << "\nMain function about to end - remaining objects will be destroyed." << std::endl;
     
     return (0);
 }
