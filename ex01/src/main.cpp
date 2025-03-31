@@ -6,7 +6,7 @@
 /*   By: obouayed <obouayed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 16:30:48 by obouayed          #+#    #+#             */
-/*   Updated: 2025/03/31 11:25:45 by obouayed         ###   ########.fr       */
+/*   Updated: 2025/03/31 12:16:54 by obouayed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,51 +18,41 @@ int main()
     
     // Test default constructor
     ScavTrap defaultTrap;
+    std::cout << "Default ScavTrap created - Name: " << defaultTrap.getName() 
+              << ", HP: " << defaultTrap.getHitpoints() 
+              << ", Energy: " << defaultTrap.getEnergyPoints() 
+              << ", Attack damage: " << defaultTrap.getAttackDamage() << std::endl;
     
     // Test parameterized constructor
-    ScavTrap scavTrap1("SC4V-TP");
+    ScavTrap scavTrap("SC4V-TP");
     
     // Test copy constructor
-    ScavTrap scavTrap2(scavTrap1);
+    ScavTrap scavCopy(scavTrap);
+    std::cout << "Copy created - Name: " << scavCopy.getName() << std::endl;
     
-    std::cout << "\n=== TESTING BASIC FUNCTIONALITY ===\n" << std::endl;
+    std::cout << "\n=== TESTING FUNCTIONALITY ===\n" << std::endl;
     
-    // Test attack function (ScavTrap version)
-    scavTrap1.attack("Bandit");
+    // Test attack function (overridden)
+    scavTrap.attack("Bandit");
     
-    // Test takeDamage function (inherited from ClapTrap)
-    scavTrap1.takeDamage(30);
-    
-    // Test beRepaired function (inherited from ClapTrap)
-    scavTrap1.beRepaired(15);
+    // Test inherited functions
+    scavTrap.takeDamage(25);
+    scavTrap.beRepaired(10);
     
     // Test unique ScavTrap ability
-    scavTrap1.guardGate();
-    scavTrap1.guardGate(); // Test calling guardGate twice
-    
-    std::cout << "\n=== TESTING COPY CONSTRUCTOR AND ASSIGNMENT ===\n" << std::endl;
-    
-    ScavTrap original("Original");
-    original.takeDamage(20);
-    original.attack("Target");
-    
-    std::cout << "\nCreating a copy with copy constructor:" << std::endl;
-    ScavTrap copy(original);
-    
-    std::cout << "\nTesting assignment operator:" << std::endl;
-    ScavTrap assignTarget("AssignTarget");
-    assignTarget = original;
+    scavTrap.guardGate();
+    scavTrap.guardGate(); // Should indicate already in Gate keeper mode
     
     std::cout << "\n=== TESTING ENERGY DEPLETION ===\n" << std::endl;
     
-    // Create new ScavTrap for energy testing (50 energy points)
-    ScavTrap energyTest("EnergyTest");
+    // Create ScavTrap for energy testing (50 energy points)
+    ScavTrap energyTest("EnergyTester");
     
-    // Attack multiple times to deplete energy
-    for (int i = 0; i < 51; i++) {
+    // Attack to deplete energy
+    for (int i = 0; i < 50; i++) {
         if (i % 10 == 0)
             std::cout << "Attack attempt " << (i + 1) << ": ";
-        energyTest.attack("Target Dummy");
+        energyTest.attack("Target");
         if (i % 10 == 9)
             std::cout << std::endl;
     }
@@ -75,16 +65,27 @@ int main()
     
     std::cout << "\n=== TESTING LETHAL DAMAGE ===\n" << std::endl;
     
-    // Create a new ScavTrap for damage testing
+    // Create ScavTrap for damage testing
     ScavTrap defender("Defender");
     
-    // Deal a lot of damage
+    // Deal lethal damage
     defender.takeDamage(150);
     
     // Try actions while dead
     defender.attack("Someone");
     defender.beRepaired(10);
     defender.guardGate();
+    
+    std::cout << "\n=== COMPARING WITH BASE CLASS ===\n" << std::endl;
+    
+    // Create a ClapTrap for comparison
+    ClapTrap clapTrap("Original");
+    clapTrap.attack("Target");
+    
+    // Show ScavTrap's enhanced attack
+    scavTrap.attack("Same Target");
+    
+    std::cout << "\nEnd of tests - objects will be destroyed" << std::endl;
     
     return (0);
 }

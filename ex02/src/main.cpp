@@ -6,7 +6,7 @@
 /*   By: obouayed <obouayed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 16:30:48 by obouayed          #+#    #+#             */
-/*   Updated: 2025/03/31 11:36:06 by obouayed         ###   ########.fr       */
+/*   Updated: 2025/03/31 12:18:59 by obouayed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,10 @@ int main()
     
     // Test default constructor
     FragTrap defaultTrap;
+    std::cout << "Default FragTrap created - Name: " << defaultTrap.getName() 
+              << ", HP: " << defaultTrap.getHitpoints() 
+              << ", Energy: " << defaultTrap.getEnergyPoints() 
+              << ", Attack damage: " << defaultTrap.getAttackDamage() << std::endl;
     
     // Test parameterized constructor
     FragTrap fragTrap1("FR4G-TP");
@@ -32,9 +36,12 @@ int main()
     
     // Test takeDamage function (inherited from ClapTrap)
     fragTrap1.takeDamage(40);
+    std::cout << "After taking damage - HP: " << fragTrap1.getHitpoints() << std::endl;
     
     // Test beRepaired function (inherited from ClapTrap)
     fragTrap1.beRepaired(20);
+    std::cout << "After repair - HP: " << fragTrap1.getHitpoints() 
+              << ", Energy: " << fragTrap1.getEnergyPoints() << std::endl;
     
     // Test unique FragTrap ability
     fragTrap1.highFivesGuys();
