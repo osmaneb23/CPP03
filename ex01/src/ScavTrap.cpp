@@ -6,7 +6,7 @@
 /*   By: obouayed <obouayed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 17:20:06 by obouayed          #+#    #+#             */
-/*   Updated: 2025/03/29 18:39:53 by obouayed         ###   ########.fr       */
+/*   Updated: 2025/03/31 11:17:11 by obouayed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,15 +32,18 @@ ScavTrap::ScavTrap(std::string name) : ClapTrap(name)
 
 ScavTrap::ScavTrap(ScavTrap const & src): ClapTrap(src)
 {
-	std::cout << "ScavTrap copy constructor called with name: " << _name << " and source name: " << src._name << "." << std::endl;
+	std::cout << "ScavTrap copy constructor called with source name: " << src._name << "." << std::endl;
     *this = src;
 }
 
 ScavTrap &ScavTrap::operator=(const ScavTrap &rhs)
 {
-	std::cout << "ScavTrap assignation operator called with name: " << _name << " and right hand side name: " << rhs._name << "." << std::endl;
+	std::cout << "ScavTrap assignation operator called with right hand side name: " << rhs._name << "." << std::endl;
     if (this != &rhs)
+    {
         ClapTrap::operator=(rhs);
+        _isGuarding = rhs._isGuarding;
+    }
     return (*this);
 }
 
@@ -67,6 +70,7 @@ void ScavTrap::guardGate()
 		return;
 	}
 	std::cout << "ScavTrap " << _name << " has entered Gate keeper mode." << std::endl;
+    _isGuarding = true;
 }
 
 void ScavTrap::attack(const std::string &target)

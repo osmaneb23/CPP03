@@ -6,7 +6,7 @@
 /*   By: obouayed <obouayed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 16:30:45 by obouayed          #+#    #+#             */
-/*   Updated: 2025/03/29 18:27:16 by obouayed         ###   ########.fr       */
+/*   Updated: 2025/03/31 11:19:17 by obouayed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,15 @@ ClapTrap::ClapTrap(std::string name) : _name(name), _hitpoints(10), _energyPoint
     std::cout << "ClapTrap " << _name << " is created." << std::endl;
 }
 
-ClapTrap::ClapTrap(ClapTrap const & src)
+ClapTrap::ClapTrap(ClapTrap const &src)
 {
-    std::cout << "ClapTrap copy constructor called with name: " << _name << " and source name: " << src._name << "." << std::endl;
+    std::cout << "ClapTrap copy constructor called with source name: " << src._name << "." << std::endl;
     *this = src;
 }
 
 ClapTrap &ClapTrap::operator=(const ClapTrap &rhs)
 {
-    std::cout << "ClapTrap assignation operator called with name: " << _name << " and right hand side name: " << rhs._name << "." << std::endl;
+    std::cout << "ClapTrap assignation operator called with right hand side name: " << rhs._name << "." << std::endl;
     if (this != &rhs)
     {
         _name = rhs._name;
@@ -44,6 +44,26 @@ ClapTrap &ClapTrap::operator=(const ClapTrap &rhs)
 ClapTrap::~ClapTrap()
 {
     std::cout << "ClapTrap " << _name << " is destroyed." << std::endl;
+}
+
+std::string ClapTrap::getName() const
+{
+	return (_name);
+}
+
+unsigned int ClapTrap::getHitpoints() const
+{
+	return (_hitpoints);
+}
+
+unsigned int ClapTrap::getEnergyPoints() const
+{
+	return (_energyPoints);
+}
+
+unsigned int ClapTrap::getAttackDamage() const
+{
+	return (_attackDamage);
 }
 
 void ClapTrap::attack(const std::string &target)
@@ -97,4 +117,5 @@ void ClapTrap::beRepaired(unsigned int amount)
     std::cout << "ClapTrap " << _name << " regains " << amount << " hitpoint(s)!" << std::endl;
     _hitpoints += amount;
     std::cout << "ClapTrap " << _name << " now has " << _hitpoints << " hitpoints." << std::endl;
+	_energyPoints--;
 }
