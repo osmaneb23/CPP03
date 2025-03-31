@@ -6,7 +6,7 @@
 /*   By: obouayed <obouayed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 11:50:19 by obouayed          #+#    #+#             */
-/*   Updated: 2025/03/31 12:03:23 by obouayed         ###   ########.fr       */
+/*   Updated: 2025/03/31 12:32:39 by obouayed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ DiamondTrap &DiamondTrap::operator=(const DiamondTrap &rhs)
     std::cout << "DiamondTrap assignation operator called with right hand side name: " << rhs._name << "." << std::endl;
     if (this != &rhs)
     {
-        ClapTrap::operator=(rhs);
+        ScavTrap::operator=(rhs);
         _name = rhs._name;
     }
     return (*this);
